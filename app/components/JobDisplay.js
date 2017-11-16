@@ -32,6 +32,7 @@ const JobDisplay = (props) => {
   return <div className="job-editor">
 
     <TextField
+    className="input-item"
     floatingLabelText="Job Title"
     value={props.jobObj.jobRole}
     data-key="jobRole" 
