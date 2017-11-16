@@ -1,5 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
+import JobDisplay from './JobDisplay'
+import JobBar from './JobBar'
+
 // import NOTNEEDEDPasswordInput from './PasswordInput'
 
 class App extends React.Component {
@@ -8,41 +11,52 @@ class App extends React.Component {
     super(props);
     this.listJobs = this.listJobs.bind(this)
     this.setJobIndex = this.setJobIndex.bind(this)
-    this.showJobInfo = this.showJobInfo.bind(this)
+    this.jobModifier = this.jobModifier.bind(this)
+    this.booleanJobModifier = this.booleanJobModifier.bind(this)
+    this.deleteJob = this.deleteJob.bind(this)
+    this.newJob = this.newJob.bind(this)
     this.state = {
-      edit: false,
       jobIndex: null,
       jobs: [
         {
           jobRole: 'JuniorDev',
           company: 'Isobar',
-          interviewDate: 'NA',
           contactName: 'John Smith',
-          testComplete: true,
-          coverLetter: '',
+          interviewDate: 'NA',
+          testComplete: false,
+          coverLetter: 'blah',
+          jobOffer: false,
+          salary: '$50,000',
+          dateApplied: 'November 11 2017'
         },
         {
           jobRole: 'MediumDev',
           company: 'ZenDesk',
-          interviewDate: 'NA',
           contactName: 'Patti Smith',
-          testComplete: true,
-          coverLetter: '',
+          interviewDate: 'NA',
+          testComplete: false,
+          coverLetter: 'blah',
+          jobOffer: false,
+          salary: '$50,000',
+          dateApplied: 'November 11 2017'
         },
         {
           jobRole: 'UltraDev',
           company: 'Oddyssey',
-          interviewDate: 'NA',
           contactName: 'Steve Jobs',
-          testComplete: true,
-          coverLetter: '',
+          interviewDate: 'NA',
+          testComplete: false,
+          coverLetter: 'blah',
+          jobOffer: false,
+          salary: '$50,000',
+          dateApplied: 'November 11 2017'
         }
       ]
     }
   }
 
   listJobs(job, index) {
-    return <li onClick={() => this.setJobIndex(job) }
+    return <li onClick={() => this.setJobIndex(job)}
     key={index}>
     {job.jobRole}</li>
   }
@@ -53,29 +67,58 @@ class App extends React.Component {
     })
   }
 
-  showJobInfo() {
-    if (this.state.jobIndex != null) {
-      // var jobObj = this.state.jobs[this.state.jobIndex]
-      var {jobRole, company, contactName, interviewDate, coverLetter, testComplete} = this.state.jobs[this.state.jobIndex];
-    }
-    if (this.state.jobIndex != null) {
-      return <div>
-        <p>job role: {jobRole}</p>
-        <p>company: {company}</p>
-        <p>contact name: {contactName}</p>
-        <p>interview date: {interviewDate}</p>
-        {testComplete ? <p>test complete: yes</p> : <p>test complete: no</p> }
-        <p>cover letter: {coverLetter}</p>
-      </div>
-    } else {
-      return <h2>click on a job from the left</h2>
-    }
+  jobModifier(job) {
+    var jobs = this.state.jobs
+    jobs[this.state.jobIndex][job.dataset.key] = job.value
+    this.setState({
+      jobs: jobs,
+      jobIndex: null
+    })
   }
 
-  editJob() {
-    return <input value="junior dev"></input>
+  booleanJobModifier(job) {
+    if (job.value === "off") {
+      var stateOfCheckbox = true
+    } else if (job.value === "on") {
+      var stateOfCheckbox = false
+    }
+    var jobs = this.state.jobs
+    jobs[this.state.jobIndex][job.dataset.key] = stateOfCheckbox
+    this.setState({
+      jobs: jobs
+    })
   }
 
+  deleteJob(job) {
+    var jobs = this.state.jobs
+    jobs.splice([this.state.jobIndex], 1)
+    this.setState({
+      jobs: jobs,
+      jobIndex: null
+    })
+  }
+
+  newJob() {
+    var jobs = this.state.jobs
+    var newJobNum = this.state.jobs.length + 1
+    var newJob = 
+    {
+      jobRole: 'new job ' + newJobNum,
+      company: '',
+      contactName: '',
+      interviewDate: '',
+      testComplete: false,
+      coverLetter: '',
+      jobOffer: false,
+      salary: '',
+      dateApplied: ''
+    }
+
+    var newJobsArr = new Array(...jobs, newJob)
+    this.setState({
+      jobs: newJobsArr
+    })
+  }
 
   render() {
     var currentJob = this.state.jobs[this.state.jobIndex]
@@ -87,18 +130,18 @@ class App extends React.Component {
           <ul>
             {this.state.jobs.map(this.listJobs)}
           </ul>
+          <button onClick={this.newJob}>new job application</button>
         </div>
 
-        <div className="job-info">
-          {this.state.jobIndex != null && <h2>Job Info</h2>}
-          {this.state.jobIndex != null && <button>edit</button>}
-          {this.showJobInfo()}  
-        </div>
+        {this.state.jobIndex != null && <JobDisplay jobObj={currentJob}
+        jobModifier={this.jobModifier}
+        booleanJobModifier={this.booleanJobModifier}
+        deleteJob={this.deleteJob}
+        />}
 
       </div>
     )
   }
-
 }
 
 module.exports = App
