@@ -1,4 +1,7 @@
 import React from 'react'
+import TextField from 'material-ui/TextField';
+import Checkbox from 'material-ui/Checkbox';
+import RaisedButton from 'material-ui/RaisedButton';
 
 var tickOrNoTick = function(trueFalseState) {
   if (trueFalseState == true) {
@@ -16,62 +19,75 @@ var checkBoxValue = function(trueFalseState) {
   }
 }
 
+const styles = {
+  block: {
+    maxWidth: 250,
+  },
+  checkbox: {
+    marginBottom: 16,
+  },
+};
+
 const JobDisplay = (props) => {
   return <div className="job-editor">
 
-    <span>role: </span>
-    <input value={props.jobObj.jobRole}
+    <TextField
+    floatingLabelText="Job Title"
+    value={props.jobObj.jobRole}
     data-key="jobRole" 
-    onChange={(event) => props.jobModifier(event.target)} />
+    onChange={(event) => props.jobModifier(event.target)} /><br />
 
-    <span>company: </span>
-    <input value={props.jobObj.company}
+    <TextField
+    floatingLabelText="Company name"
+    value={props.jobObj.company}
     data-key="company"
-    onChange={(event) => props.jobModifier(event.target)} />
+    onChange={(event) => props.jobModifier(event.target)} /><br />
 
-    <span>contact: </span>
-    <input value={props.jobObj.contactName}
+    <TextField
+    floatingLabelText="Contact name"
+    value={props.jobObj.contactName}
     data-key="contactName"
-    onChange={(event) => props.jobModifier(event.target)} />
+    onChange={(event) => props.jobModifier(event.target)} /><br />
 
-    <span>date applied: </span>
-    <input value={props.jobObj.dateApplied}
+    <TextField
+    floatingLabelText="Date applied"
+    value={props.jobObj.dateApplied}
     data-key="dateApplied"
-    onChange={(event) => props.jobModifier(event.target)} />
+    onChange={(event) => props.jobModifier(event.target)} /><br />
 
-    <span>interview date: </span>
-    <input value={props.jobObj.interviewDate}
+    <TextField
+    floatingLabelText="Interview date"
+    value={props.jobObj.interviewDate}
     data-key="interviewDate"
-    onChange={(event) => props.jobModifier(event.target)} />
+    onChange={(event) => props.jobModifier(event.target)} /><br />
 
-    <span>salary: </span>
-    <input
+    <TextField
+    floatingLabelText="Salary"
     value={props.jobObj.salary}
     data-key="salary"
-    onChange={(event) => props.jobModifier(event.target)} />
+    onChange={(event) => props.jobModifier(event.target)} /><br />
 
-    <span>code test completed? </span>
-    <input type="checkbox"
+    <Checkbox
     data-key="testComplete"
-    onChange={(event) => props.booleanJobModifier(event.target)}
-    checked={tickOrNoTick(props.jobObj.testComplete)}
-    value={checkBoxValue(props.jobObj.testComplete)} />
+    label="Code test completed"
+    checked={props.jobObj.testComplete}
+    onCheck={(event) => props.booleanJobModifier(event.target)}
+    style={styles.checkbox}
+    /><br />
 
-    <span>job offer? </span>
-    <input type="checkbox"
+    <Checkbox
     data-key="jobOffer"
-    onChange={(event) => props.booleanJobModifier(event.target)}
-    checked={tickOrNoTick(props.jobObj.jobOffer)}
-    value={checkBoxValue(props.jobObj.jobOffer)} />
+    label="Job offered"
+    checked={props.jobObj.jobOffer}
+    onCheck={(event) => props.booleanJobModifier(event.target)}
+    style={styles.checkbox}
+    /><br />
 
-    <span>cover letter: </span>
-    <textarea value={  props.jobObj.coverLetter}
-    data-key="coverLetter"
-    onChange={(event) => props.jobModifier(event.target)}
-    cols="160"
-    rows="20"></textarea>
-
-    <button onClick={() => props.deleteJob()}>delete job</button>
+    <RaisedButton
+    className="raised-button"
+    label="Delete job"
+    fullWidth={true}
+    onClick={() => props.deleteJob()} />
 
   </div>
 }

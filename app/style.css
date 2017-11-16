@@ -11,19 +11,29 @@ body {
 .wrapper {
   min-height: 700px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-items: stretch;
   flex-wrap: wrap
 }
 
 .side-bar {
-  /*display: inline-block;*/
-  width: 25%;
-  background-color: cyan;
+  position: relative;
+  width: 20%;
+  background-color: lightsteelblue;
 }
 
 .job-editor {
-  /*display: inline-block;*/
-  width: 75%;
-  background-color: azure;
+  position: relative;
+  width: 20%;
+  background-color: powderblue;
+}
+
+.cover-letter {
+  width: 60%;
+  background-color: whitesmoke;
+}
+
+.raised-button {
+  position: absolute;
+  bottom: 0;
 }

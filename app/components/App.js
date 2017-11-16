@@ -1,7 +1,11 @@
 import React from 'react'
 import _ from 'lodash'
 import JobDisplay from './JobDisplay'
-import JobBar from './JobBar'
+import CoverLetter from './CoverLetter'
+import RaisedButton from 'material-ui/RaisedButton';
+
+
+// import JobBar from './JobBar'
 
 // import NOTNEEDEDPasswordInput from './PasswordInput'
 
@@ -15,8 +19,9 @@ class App extends React.Component {
     this.booleanJobModifier = this.booleanJobModifier.bind(this)
     this.deleteJob = this.deleteJob.bind(this)
     this.newJob = this.newJob.bind(this)
+    this.updateCheck = this.updateCheck.bind(this)
     this.state = {
-      jobIndex: null,
+      jobIndex: 1,
       jobs: [
         {
           jobRole: 'JuniorDev',
@@ -56,9 +61,12 @@ class App extends React.Component {
   }
 
   listJobs(job, index) {
-    return <li onClick={() => this.setJobIndex(job)}
-    key={index}>
-    {job.jobRole}</li>
+    return <RaisedButton
+    key={index}
+    label={job.jobRole}
+    fullWidth={true}
+    onClick={() => this.setJobIndex(job)} />
+
   }
 
   setJobIndex(job) {
@@ -72,18 +80,20 @@ class App extends React.Component {
     jobs[this.state.jobIndex][job.dataset.key] = job.value
     this.setState({
       jobs: jobs,
-      jobIndex: null
     })
   }
 
+  updateCheck() {
+    this.setState((oldState) => {
+      return {
+        checked: !oldState.checked,
+      };
+    });
+  }
+
   booleanJobModifier(job) {
-    if (job.value === "off") {
-      var stateOfCheckbox = true
-    } else if (job.value === "on") {
-      var stateOfCheckbox = false
-    }
     var jobs = this.state.jobs
-    jobs[this.state.jobIndex][job.dataset.key] = stateOfCheckbox
+    jobs[this.state.jobIndex][job.dataset.key] = !jobs[this.state.jobIndex][job.dataset.key]
     this.setState({
       jobs: jobs
     })
@@ -126,14 +136,23 @@ class App extends React.Component {
       <div className="wrapper">
 
         <div className="side-bar">
-          <h2>Job List</h2>
           <ul>
             {this.state.jobs.map(this.listJobs)}
           </ul>
-          <button onClick={this.newJob}>new job application</button>
+          <RaisedButton
+          className="raised-button"
+          label="New job application"
+          fullWidth={true}
+          onClick={this.newJob} />
         </div>
 
         {this.state.jobIndex != null && <JobDisplay jobObj={currentJob}
+        jobModifier={this.jobModifier}
+        booleanJobModifier={this.booleanJobModifier}
+        deleteJob={this.deleteJob}
+        />}
+
+        {this.state.jobIndex != null && <CoverLetter jobObj={currentJob}
         jobModifier={this.jobModifier}
         booleanJobModifier={this.booleanJobModifier}
         deleteJob={this.deleteJob}
