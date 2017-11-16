@@ -139,11 +139,13 @@ class App extends React.Component {
           <ul>
             {this.state.jobs.map(this.listJobs)}
           </ul>
-          <RaisedButton
-          className="raised-button"
-          label="New job application"
-          fullWidth={true}
-          onClick={this.newJob} />
+            <div>
+            <RaisedButton
+            className="raised-button"
+            label="New job application"
+            fullWidth={true}
+            onClick={this.newJob} />
+          </div>
         </div>
 
         {this.state.jobIndex != null && <JobDisplay jobObj={currentJob}
