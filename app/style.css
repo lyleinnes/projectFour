@@ -9,7 +9,7 @@ body {
 }
 
 .wrapper {
-  min-height: 700px;
+  min-height: 600px;
   display: flex;
   justify-content: space-between; 
   align-items: stretch;
