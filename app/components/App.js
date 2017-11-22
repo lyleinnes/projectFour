@@ -29,7 +29,7 @@ class App extends React.Component {
           contactName: 'John Smith',
           interviewDate: 'NA',
           testComplete: false,
-          coverLetter: 'blah',
+          coverLetter: 'cover letter goes here',
           jobOffer: false,
           salary: '$50,000',
           dateApplied: 'November 11 2017'
@@ -40,9 +40,9 @@ class App extends React.Component {
           contactName: 'Patti Smith',
           interviewDate: 'NA',
           testComplete: false,
-          coverLetter: 'blah',
+          coverLetter: 'cover letter goes here',
           jobOffer: false,
-          salary: '$50,000',
+          salary: '$75,000',
           dateApplied: 'November 11 2017'
         },
         {
@@ -51,9 +51,9 @@ class App extends React.Component {
           contactName: 'Steve Jobs',
           interviewDate: 'NA',
           testComplete: false,
-          coverLetter: 'blah',
+          coverLetter: 'cover letter goes here',
           jobOffer: false,
-          salary: '$50,000',
+          salary: '$140,000',
           dateApplied: 'November 11 2017'
         }
       ]
