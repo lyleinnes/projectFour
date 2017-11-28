@@ -18,6 +18,6 @@ To offer a single page app for users to keep track of all of their pending job a
 * Currently only a front-end app, and as such, data will be lost between page visits.
 * No user-login functionality yet. Will be added in at the same time the back-end is built.
 
-NB
+Note:
 ---
 If you would like to contribute, feel free to fork and make changes. I believe with a few iterative changes this app would be very helpful for job-seekers.
